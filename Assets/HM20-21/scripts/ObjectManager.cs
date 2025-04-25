@@ -11,7 +11,6 @@ namespace HW2021
 
         private Camera _camera;
         private Rigidbody _selectedObject;
-        private Vector3 _grabOffset;
 
         private IObjectInteraction _grab;
         private IObjectInteraction _drag;
@@ -31,16 +30,16 @@ namespace HW2021
         void Update()
         {
             if (Input.GetMouseButtonDown(0))
-                _grab.Execute(_camera, ref _selectedObject, ref _grabOffset, 0);
+                _grab.Execute(_camera, ref _selectedObject, 0);
 
             if (Input.GetMouseButton(0) && _selectedObject != null)
-                _drag.Execute(_camera, ref _selectedObject, ref _grabOffset, _dragSpeed);
+                _drag.Execute(_camera, ref _selectedObject, _dragSpeed);
 
             if (Input.GetMouseButtonUp(0) && _selectedObject != null)
-                _release.Execute(_camera, ref _selectedObject, ref _grabOffset, 0);
+                _release.Execute(_camera, ref _selectedObject, 0);
 
             if (Input.GetMouseButtonDown(1))
-                _explosion.Execute(_camera, ref _selectedObject, ref _grabOffset, _explosionRadius);
+                _explosion.Execute(_camera, ref _selectedObject, _explosionRadius);
         }
     }
 }

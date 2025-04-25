@@ -6,7 +6,7 @@ namespace HW2021
     {
         private float _dragHeight = 2f;
 
-        public void Execute(Camera cam, ref Rigidbody selectedObject, ref Vector3 grabOffset, float dragSpeed)
+        public void Execute(Camera cam, ref Rigidbody selectedObject, float dragSpeed)
         {
             if (selectedObject == null)
                 return;

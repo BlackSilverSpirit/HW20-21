@@ -11,7 +11,7 @@ namespace HW2021
             this._explosionPrefab = explosionPrefab;
         }
 
-        public void Execute(Camera cam, ref Rigidbody selectedObject, ref Vector3 grabOffset, float explosionRadius)
+        public void Execute(Camera cam, ref Rigidbody selectedObject, float explosionRadius)
         {
             var ray = cam.ScreenPointToRay(Input.mousePosition);
 

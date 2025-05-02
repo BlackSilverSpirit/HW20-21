@@ -5,7 +5,10 @@ namespace HM20_21.Scripts
 {
     public class GrabSimpleRB : MonoBehaviour, IGrabbable
     {
+        [SerializeField] private float _dragSpeed = 15f;
+        
         private Rigidbody _rigidbody;
+        private bool _isGrabbed;
 
         private void Awake()
         {
@@ -16,6 +19,8 @@ namespace HM20_21.Scripts
         {
             if (_rigidbody != null)
             {
+                _isGrabbed = true;
+                
                 _rigidbody.useGravity = false;
                 _rigidbody.velocity = Vector3.zero;
                 _rigidbody.angularVelocity = Vector3.zero;
@@ -27,6 +32,8 @@ namespace HM20_21.Scripts
         {
             if (_rigidbody != null)
             {
+                _isGrabbed = false;
+                
                 _rigidbody.useGravity = true;
                 _rigidbody.isKinematic = false;
             }
@@ -34,6 +41,10 @@ namespace HM20_21.Scripts
 
         public void Drag(Vector3 targetPosition)
         {
+            if (_isGrabbed)
+            {
+                _rigidbody.MovePosition(Vector3.Lerp(_rigidbody.position, targetPosition, Time.deltaTime * _dragSpeed));
+            }
         }
     }
 }

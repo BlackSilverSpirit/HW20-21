@@ -11,17 +11,13 @@ namespace HM20_21.Scripts
             _grabbableMask = grabbableMask;
         }
 
-        public IGrabbable TryGrab(Ray ray, out Rigidbody grabbedRigidbody)
+        public IGrabbable TryGrab(Ray ray)
         {
-            grabbedRigidbody = null;
-
-            if (Physics.Raycast(ray, out RaycastHit hit) &&
-                (_grabbableMask.value & (1 << hit.collider.gameObject.layer)) != 0)
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _grabbableMask))
             {
                 IGrabbable grabbable = hit.collider.GetComponent<IGrabbable>();
                 if (grabbable != null)
                 {
-                    grabbedRigidbody = hit.rigidbody;
                     grabbable.OnGrab();
                     return grabbable;
                 }

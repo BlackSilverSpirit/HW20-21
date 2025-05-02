@@ -13,8 +13,7 @@ namespace HM20_21.Scripts
         private DragService _dragService;
         private ReleaseService _releaseService;
         private ExplosionService _explosionService;
-
-        private Rigidbody _grabbedRigidbody;
+        
         private IGrabbable _currentGrabbable;
 
         private void Start()
@@ -37,18 +36,14 @@ namespace HM20_21.Scripts
 
             if (Input.GetMouseButtonDown(0))
             {
-                _currentGrabbable = _grabService.TryGrab(ray, out _grabbedRigidbody);
+                _currentGrabbable = _grabService.TryGrab(ray);
             }
 
             if (Input.GetMouseButton(0))
             {
-                if (_grabbedRigidbody != null)
+                if (_currentGrabbable != null)
                 {
-                    _dragService.Drag(ray, _grabbedRigidbody);
-                }
-                else if (_currentGrabbable != null)
-                {
-                    _dragService.DragWithoutRigidbody(ray, _currentGrabbable);
+                    _dragService.Drag(ray, _currentGrabbable);
                 }
             }
 
